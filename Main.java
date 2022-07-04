@@ -2,7 +2,10 @@ package Simulaattori;
 
 /**
  *
- * @author l_vas
+ * @author Lauri Vasankari, lauri.vasankari@gmail.com
+ * Created for academic purposes, used to produce data for EURO22 conference presentation
+ * If used or applied elsewhere, please cite to the original as
+ * "Binomial Surface Combat Simulator" by Lauri Vasankari, 4.7.2022, 
  */
 
 import java.io.FileNotFoundException;
@@ -30,6 +33,9 @@ public class Main implements Cloneable {
     static int BFAC = 2;
     static int RC = 5;
     
+    static double poh_detected = 0.0;
+    static double poh_undetected = 0.0;
+    
     static int usv_missiles = 8;
     static int corvette_missiles = 8;
     static int fac_missiles = 4;
@@ -48,7 +54,20 @@ public class Main implements Cloneable {
     //uswUSV = 47.3M
     //isrUSV = 35.5M
     //total cost of SAG: max 942.52
+
         Scanner obj = new Scanner(System.in);
+        
+        System.out.println("Choose the probability of hit: modern / historical");
+        
+        if(obj.nextLine().equals("modern")){
+            poh_detected = 0.45;
+            poh_undetected = 0.63;
+        }else{
+            poh_detected = 0.264;
+            poh_undetected = 0.684;            
+        }
+        
+        System.out.println("Used probabilities for undetected engagement: " + poh_undetected + "\nand detected engagement: " + poh_detected + "\n");
         
         System.out.println("Choose number of encounter iterations: ");
         
@@ -264,13 +283,13 @@ public class Main implements Cloneable {
                             if(p < 0.345){    //selecting whether the engagement has been detected or not
                                 for(int j = 1; j <= n; j++){
                                     int f = binomial(n, j);
-                                    double t = f*(Math.pow(0.68,j))*(Math.pow((1-0.68),(n-j))); //calculating the probability of impact
+                                    double t = f*(Math.pow(poh_undetected,j))*(Math.pow((1-poh_undetected),(n-j))); //calculating the probability of impact
                                     threshold = threshold+t;
                                     }
                             }else{ //if the engagement is detected, the probability of succesful engagement is lower
                                 for(int j = 1; j <= n; j++){
                                     int f = binomial(n, j);
-                                    double t = f*(Math.pow(0.26,j))*(Math.pow((1-0.26),(n-j)));
+                                    double t = f*(Math.pow(poh_detected,j))*(Math.pow((1-poh_detected),(n-j)));
                                     threshold = threshold+t;
                                     }
                                 }
@@ -291,13 +310,13 @@ public class Main implements Cloneable {
                             if(p < 0.345){    
                                 for(int j = 1; j <= n; j++){
                                     int f = binomial(n, j);
-                                    double t = f*(Math.pow(0.68,j))*(Math.pow((1-0.68),(n-j)));
+                                    double t = f*(Math.pow(poh_undetected,j))*(Math.pow((1-poh_undetected),(n-j)));
                                     threshold = threshold+t;
                                     }
                             }else{
                                 for(int j = 1; j <= n; j++){
                                     int f = binomial(n, j);
-                                    double t = f*(Math.pow(0.26,j))*(Math.pow((1-0.26),(n-j)));
+                                    double t = f*(Math.pow(poh_detected,j))*(Math.pow((1-poh_detected),(n-j)));
                                     threshold = threshold+t;
                                     }
                                 }
@@ -335,13 +354,13 @@ public class Main implements Cloneable {
                                     if(p < 0.345){    
                                         for(int j = 1; j <= n; j++){
                                             int f = binomial(n, j);
-                                            double t = f*(Math.pow(0.68,j))*(Math.pow((1-0.68),(n-j)));
+                                            double t = f*(Math.pow(poh_undetected,j))*(Math.pow((1-poh_undetected),(n-j)));
                                             threshold = threshold+t;
                                             }
                                     }else{
                                         for(int j = 1; j <= n; j++){
                                             int f = binomial(n, j);
-                                            double t = f*(Math.pow(0.26,j))*(Math.pow((1-0.26),(n-j)));
+                                            double t = f*(Math.pow(poh_detected,j))*(Math.pow((1-poh_detected),(n-j)));
                                             threshold = threshold+t;
                                             }
                                         }
@@ -363,13 +382,13 @@ public class Main implements Cloneable {
                                     if(p < 0.345){    
                                         for(int j = 1; j <= n; j++){
                                             int f = binomial(n, j);
-                                            double t = f*(Math.pow(0.68,j))*(Math.pow((1-0.68),(n-j)));
+                                            double t = f*(Math.pow(poh_undetected,j))*(Math.pow((1-poh_undetected),(n-j)));
                                             threshold = threshold+t;
                                             }
                                     }else{
                                         for(int j = 1; j <= n; j++){
                                             int f = binomial(n, j);
-                                            double t = f*(Math.pow(0.26,j))*(Math.pow((1-0.26),(n-j)));
+                                            double t = f*(Math.pow(poh_detected,j))*(Math.pow((1-poh_detected),(n-j)));
                                             threshold = threshold+t;
                                             }
                                         }
