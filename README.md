@@ -10,6 +10,8 @@ However, while the simplicity is the beauty of these models and promotes Occam's
 With above mentioned points in mind, the program was written to simulate a surface warfare encounter between two parties, using binomial probability to determine the success of a missile engagement. At first, the program allocates engagements to units which have missiles left to use. Then, by a random draw, it is determined wether the target spots the engagement in time. The spotting effects the probability of successful engagement in accordance with "An analysis of the historical effectiveness of anti-ship cruise missiles in littoral warfare" by John C. Schulte, available at https://calhoun.nps.edu/handle/10945/27962.
 These probabilities are used, depending on the random draw, to calculate the probability of success in a binomial distribution with the particular salvo size (n) and drawing another uniform random number to determine if the engagement results in a hit. 
 
+## Use
+
 The program has a simple text interface that can be used to produce quick simulations for a determined number of iterations, preferably over 100 at a time. The execution is fairly fast up to 10 000 iterations even for a multitude of force composition options.
 
 For now, the opposing force composition is static as are the combatant features. However, these can be tweaked as desired in the code itself to test different set ups. 
